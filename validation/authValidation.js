@@ -1,0 +1,21 @@
+const express = require("express");
+const Joi = require("@hapi/joi");
+
+//validation for Login.
+validate = async (body) => {
+    const joischema = Joi.object({
+        name: Joi.string().min(5).max(50).required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(5).required(),
+
+    });
+    const joivalidate = joischema.validate(body);
+    if (joivalidate.error) {
+        return joivalidate.error.details[0].message;
+    }
+    else
+        return "";
+}
+
+
+module.exports = { validate };
