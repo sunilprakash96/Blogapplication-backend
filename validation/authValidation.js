@@ -4,7 +4,6 @@ const Joi = require("@hapi/joi");
 //validation for Login.
 validate = async (body) => {
     const joischema = Joi.object({
-        name: Joi.string().min(5).max(50).required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(5).required(),
 

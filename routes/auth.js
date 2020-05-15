@@ -9,4 +9,6 @@ router.get('/auth', function (req, res) {
 
 router.post('/auth', authenticateUser);
 
+router.post('/authenticaterefreshtoken',authenticateRefreshToken);
+
 module.exports=router

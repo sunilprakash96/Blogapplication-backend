@@ -1,8 +1,17 @@
-const { saveUser, findUser } = require('../services/userService');
+const { saveUser, findUser, getUser } = require('../services/userService');
 const { validate } = require('../validation/userValidation');
 const bcrypt = require('bcrypt');
-const Joi = require('@hapi/joi');
 
+getuser = async (req, res) => {
+    const user = await getUser();
+    if (user) {
+        return res.status(200).send(user);
+    }
+    else {
+        return res.status(400).send({ message: "The User is not Found" });
+    }
+
+}
 
 createUser = async (req, res) => {
     try {
@@ -12,7 +21,6 @@ createUser = async (req, res) => {
         if (validateUser) {
             return res.status(400).send({ message: validateUser });
         }
-
 
         const findEmail = await findUser(req.body.email);
         if (req.body.email === findEmail.email) {
@@ -33,4 +41,4 @@ createUser = async (req, res) => {
 }
 
 
-module.exports = { createUser };
+module.exports = { createUser, getuser };

@@ -1,9 +1,13 @@
 const { User } = require('../models/userModel')
 
+getUser = async () => {
+    const user = await User.find();
+    return user;
+}
+
 findUser = async (email) => {
     try {
         const user = await User.findOne({ email });
-        console.log()
         if (user)
             return user;
         else
@@ -25,4 +29,4 @@ saveUser = async (user) => {
     }
 }
 
-module.exports = { saveUser, findUser };
+module.exports = { saveUser, findUser, getUser };
